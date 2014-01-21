@@ -1,0 +1,19 @@
+<% content_for :page_title do %>
+  <%= t(:importation_process_collection) + ": " +@importation_attachment.collection_name  %>  |  
+  <%= link_to 'Volver a la Importación', edit_admin_importation_path(@importation_attachment.importation_id) %>
+<% end %>
+<h1>Descomprimido </h1>
+<br />
+<table>
+	<tr>
+		<th>nombre</th>
+		<th>imagen</th>	
+	</tr>
+	<% @importation_attachment.get_files.each_value do |file| %>
+
+	<tr>
+		<td><%= file[:name] %></td>
+        <td><%= image_tag file[:url], size: "100x100"  %></td>
+	</tr>
+	<% end %>
+</table>

@@ -1,0 +1,24 @@
+<% content_for :page_title do %>
+  <%= t(:importations) %>
+<% end %>
+<%= render :partial => 'spree/admin/shared/product_sub_menu' %>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @importation.name %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @importation.status %>
+</p>
+
+<p>
+  <b>Created at:</b>
+  <%= @importation.created_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_admin_importation_path(@importation) %> |
+<%= link_to 'Back', admin_importations_path %>

@@ -1,0 +1,29 @@
+<%= render :partial => 'spree/admin/importation_process/menu' %>
+<h1>Estado de los Productos </h1>
+<br />
+<table>
+	<tr>
+		<th>sku</th>
+		<th>Precio Importación</th>
+		<th>Estado</th>
+		<th>Precio Prodcuto</th>
+    </tr>
+	<% @importation_products.each do |product| %>
+	<tr>
+		<td><%=product.sku %></td>
+		<td><%=product.price %></td>
+		<td><%=@importation_attachment.get_message_by_collection_status product.status %></td>
+		<% spree_product= product.get_product %>
+		<% if spree_product.nil?%>
+		 <td style="color: orange;"> no relacionado</td>
+		<% else %>
+		  <% color = 'green' %>
+		  <% color = 'red' if product.price!=spree_product.price %>
+		  <td style="color: <%= color %>;"><%= spree_product.price %></td>
+		<% end %>
+		
+	</tr>
+	<% end %>    
+</table>
+
+</ul>

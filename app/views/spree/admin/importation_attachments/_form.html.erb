@@ -1,0 +1,14 @@
+
+<%= form_tag({action: :create}, multipart: true) do %>
+  <div class="field">
+  <%= label_tag 'Fichero' %>
+  <%= file_field_tag 'attachment' %>
+
+  </div>
+  <div class="field">
+   <%= label_tag 'Tipo de datos que contiene' %>
+   <%= text_field_tag 'collection_name', params[:collection] %>
+
+  </div>
+   <%= submit_tag "Subir" %> 
+<% end %>

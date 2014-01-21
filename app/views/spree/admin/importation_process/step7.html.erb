@@ -1,0 +1,20 @@
+<%= render :partial => 'spree/admin/importation_process/menu' %>
+<h1>Acciones a Realizar</h1>
+<br />
+<table>
+	<tr>
+		<th>sku</th>
+		<th>imagen deseada</th>
+		<th>estado</th>	
+		<th>path</th>				
+	</tr>
+	
+	<% @importation_attachment.process.each do |message| %>
+	<tr>
+		<td><%= message[:sku] %></td>
+		<td><%= message[:image] %></td>	
+		<td><b style="color: <%= message[:status_color] %>; "><%= message[:status] %><b></td>	
+		<td><%= image_tag message[:image_original] if message[:image_original] %></td>		
+	</tr>
+	<% end %>
+</table>

@@ -1,0 +1,29 @@
+<%= render :partial => 'spree/admin/importation_process/menu' %>
+<ul>
+	<% @importation_attachment.process.each do |message| %>
+	<li>
+		<%= message %>
+	</li>
+	<% end %>
+</ul>
+<table>
+	<tr>
+		<% @importation_attachment.get_columns.each do |c| %>
+		<th>
+			<%= c %>
+		</th>
+		<% end %>
+    </tr>
+
+<% if @importation_attachment.status >= 2 %>
+  <% @importation_attachment.data_hash.each do |row| %>
+     <tr>
+     	<% row.values.each do |data| %>
+     	<td>
+     		<%= data.to_s.force_encoding("UTF-8") %>
+     	</td>
+     	<% end %>
+     </tr>
+  <% end%>
+<% end %>
+</table>

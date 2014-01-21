@@ -1,0 +1,30 @@
+<% content_for :page_title do %>
+  <%= t(:importations) %>
+<% end %>
+<%= render :partial => 'spree/admin/shared/product_sub_menu' %>
+<h1>Listing importation_attachments</h1>
+
+<table>
+  <tr>
+    <th><%= t(:filename) %></th>
+    <th><%= t(:content_type) %></th>
+    <th><%= t(:collection_name) %></th>
+    <th><%= t(:importation) %></th>
+    <th></th>
+    <th></th>
+   
+  </tr>
+
+<% @importation_attachments.each do |importation_attachment| %>
+  <tr>
+    <td><%= importation_attachment.filename %></td>
+    <td><%= importation_attachment.content_type %></td>
+    <td><%= importation_attachment.collection_name %></td>
+    <td><%= link_to 'Edit Importation', edit_admin_importation_path(importation_attachment.importation_id) %></td> 
+    <td><%= link_to 'Show', [:admin,importation_attachment] %> </td>
+    <td><%= link_to 'Destroy', [:admin,importation_attachment], method: :delete %>  </td>
+  </tr>
+<% end %>
+</table>
+
+

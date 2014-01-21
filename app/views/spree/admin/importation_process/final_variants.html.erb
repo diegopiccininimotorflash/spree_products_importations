@@ -1,0 +1,49 @@
+<%= render :partial => 'spree/admin/importation_process/menu' %>
+<h1>Estado de los Variantes</h1>
+<br />
+<table>
+	<tr>
+		<th>sku</th>
+		<th>Estado</th>
+		<th>Precio Importación</th>		
+		<th>Precio Variante</th>
+		<th>Talla Importación</th>
+		<th>Talla variante</th>
+		<th>Color Importación</th>
+		<th>Color variante</th>		
+    </tr>
+	<% @importation_variants.each do |variant| %>
+	<tr>
+		<td><%=variant.sku %></td>
+		<td><%=@importation_attachment.get_message_by_collection_status variant.status %></td>		
+		<td><%=variant.price %></td>
+		<% spree_variant= variant.get_variant %>
+		<% if spree_variant.nil?%>
+		 <td style="color: orange;"> - </td>
+		<% else %>
+		  <% color = 'green' %>
+		  <% color = 'red' if variant.price!=spree_variant.price %>
+		  <td style="color: <%= color %>;"><%= spree_variant.price %></td>
+		<% end %>
+		<td><%=variant.talla %></td>
+		<% if spree_variant.nil?%>
+		 <td style="color: orange;"> - </td>
+		<% else %>
+		  <% color = 'green' %>
+		  <% color = 'red' if variant.talla!=spree_variant.option_value('casco_size') %>
+		  <td style="color: <%= color %>;"><%= spree_variant.option_value('casco_size') %></td>
+		<% end %>		
+		<td><%=variant.color %></td>
+		<% if spree_variant.nil?%>
+		 <td style="color: orange;"> - </td>
+		<% else %>
+		  <% color = 'green' %>
+		  <% color = 'red' if variant.color!=spree_variant.option_value('casco_color') %>
+		  <td style="color: <%= color %>;"><%= spree_variant.option_value('casco_color') %></td>
+		<% end %>				
+			
+	</tr>
+	<% end %>    
+</table>
+
+</ul>

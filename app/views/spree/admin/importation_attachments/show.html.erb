@@ -1,0 +1,58 @@
+<% content_for :page_title do %>
+  <%= t(:importations) %> | 
+  <%= link_to 'Volver a la Importación', edit_admin_importation_path(@importation_attachment.importation_id) %>
+<% end %>
+<%= render :partial => 'spree/admin/shared/product_sub_menu' %>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b><%= t(:filename) %>:</b>
+  <%= @importation_attachment.filename %>
+</p>
+
+<p>
+  <b><%= t(:content_type) %>:</b>
+  <%= @importation_attachment.content_type %>
+</p>
+
+<p>
+  <b><%= t(:columns) %>:</b> <%= @importation_attachment.ncols %>,   <b><%= t(:lines) %>:</b>  <%= @importation_attachment.nlines %>
+ </p>
+ <table>
+    <tr>
+  	<% @importation_attachment.get_columns.each do |c| %>
+ 
+ 		<td>
+ 			<%= c.force_encoding("UTF-8") %>
+ 		</td>
+
+ 	<% end %>	
+ 	</tr> 	
+ 	<% @importation_attachment.parse_file.each do |line| %>
+ 	<tr>
+ 		<% line.each do |data| %>
+ 		<td>
+ 			<%= data.to_s.force_encoding("UTF-8") %>
+ 		</td>
+ 		<% end %>
+ 		
+ 	</tr>
+ 	<% end %>
+ 	
+</table>
+
+
+
+
+<p>
+  <b>Collection name:</b>
+  <%= @importation_attachment.collection_name %>
+</p>
+
+<p>
+  <b>Importation:</b>
+  <%= @importation_attachment.importation.name %>
+</p>
+
+
+

@@ -1,0 +1,39 @@
+<%= render :partial => 'spree/admin/importation_process/menu' %>
+<h1>Estado de la importación de Categorías</h1>
+<br />
+<table>
+	<tr>
+		<th>sku</th>
+		<th>Estado</th>
+		<th>Categoría Importación</th>		
+		<th>Categorías Producto</th>
+	
+    </tr>
+	<% @importation_products_taxons.each do |product_taxon| %>
+	<tr>
+		<td><%=product_taxon.sku %></td>
+		<td><%=@importation_attachment.get_message_by_collection_status product_taxon.status %></td>		
+		<td><%=product_taxon.taxon_name %></td>
+		<% spree_product= product_taxon.get_product %>
+		<% spree_taxon= product_taxon.get_taxon %>
+		<% if spree_product.nil? %>
+		 <td style="color: orange;"> no existe el producto</td>
+		<% else %>
+		  <% if spree_taxon.nil? %>
+		     <td style="color: orange;"> no existe la categoría</td>
+		  <% else %>
+			  <% color = 'green' %>
+			  <% color = 'red' unless spree_product.taxons.include?(spree_taxon) %>
+			  <td style="color: <%= color %>;">
+			  	<% spree_product.taxons.each do |taxon| %>
+			  	  <%= taxon.name %> |
+			    <% end %> 	
+			 </td>		  
+		  <% end %>
+
+		<% end %>
+	</tr>
+	<% end %>    
+</table>
+
+</ul>

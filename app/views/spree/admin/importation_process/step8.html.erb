@@ -1,0 +1,32 @@
+<%= render :partial => 'spree/admin/importation_process/menu' %>
+<h1>Subir Imágenes</h1>
+<br />
+
+<% unless @images_to_upload.empty? %>
+	<h4 style="color: red;"> Debe subir estas imágenes para completar la importación:  </h4>
+	<textarea style="color: red;" rows="20" cols="60">
+	imagen	variantes
+	<% @images_to_upload.each do |image_to_upload| %>
+	<%= image_to_upload.imagen + "\t" + image_to_upload.total.to_s %>	
+	<% end %>
+	</textarea>	
+<% end %>
+<br />
+
+<table>
+	<tr>
+		<th><%= t(:variants) %></th>
+		<th> nombre deimagen a crear</th>
+		<th>estado</th>	
+		<th>imagen</th>				
+	</tr>
+	
+	<% @importation_attachment.process.each do |message| %>
+	<tr>
+		<td><%= message[:sku] %></td>
+		<td><%= message[:image] %></td>	
+		<td><b style="color: <%= message[:status_color] %>; "><%= message[:status] %><b></td>	
+		<td><%= message[:image_original] %></td>		
+	</tr>
+	<% end %>
+</table>

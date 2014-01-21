@@ -1,0 +1,24 @@
+<%= form_for [:admin, @importation] do |f| %>
+  <% if @importation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@importation.errors.count, "error") %> prohibited this importation from being saved:</h2>
+
+      <ul>
+      <% @importation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+
+    <%= f.hidden_field :status %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

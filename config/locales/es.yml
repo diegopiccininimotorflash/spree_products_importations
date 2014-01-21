@@ -1,0 +1,20 @@
+---
+es: 
+  importations: Importaciones
+  importation: Importación
+  new_importation: "Nueva Importación"
+  products_cathegories: "Productos y Categorías"
+  filename: "Nombre del fichero"
+  content_type: "Tipo de fichero"
+  collection_name: "Colección de datos"
+  tasks_and_actions: "Tareas y Acciones"
+  upload_file: "Subir fichero"
+  importation_process_collection: "Procesar la Colección"
+  step: "Paso"
+  columns: "Columnas"
+  rows: "Filas a importar"
+  lines: "Filas del fichero"
+  ncreates: "Registros creados"
+  nupdates: "Registros actualizados"
+  nerrors: "Registros no procesados por errores"  
+  

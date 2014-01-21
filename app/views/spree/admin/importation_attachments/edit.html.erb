@@ -1,0 +1,8 @@
+<% content_for :page_title do %>
+  <%= t(:importations) %>
+<% end %>
+<%= render :partial => 'spree/admin/shared/product_sub_menu' %>
+<h1>Editing importation_attachment</h1>
+<%= render 'formchange' %>
+<%= link_to 'Ver Contenido', [:admin,@importation_attachment] %> |
+<%= link_to 'Volver',  edit_admin_importation_path(@importation_attachment.importation_id) %>

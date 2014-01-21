@@ -1,0 +1,35 @@
+<% content_for :page_title do %>
+  <%= t(:importations) %>
+<% end %>
+<%= render :partial => 'spree/admin/shared/product_sub_menu' %>
+<h4>
+<% if @importation_actual_id.to_s > "0" %>
+ Importación Actual: <%=@importation_actual.name %>
+
+<% end %>
+</h4>
+<br />
+<h2><%= link_to 'Crear importación', new_admin_importation_path %></h2>
+
+<br />
+<% if @importations.count > 0 %>
+<table>
+  <tr>
+    <th>Name</th>
+
+
+    <th>Acciones</th>
+
+  </tr>
+
+	<% @importations.each do |importation| %>
+	  <tr>
+	    <td><%= importation.name %></td>
+	
+	    <td><%= link_to 'Editar', edit_admin_importation_path(importation) %> | <%= link_to 'Borrar', [:admin,importation], method: :delete %> </td>
+	 
+	  </tr>
+	<% end %>
+</table>
+
+<% end %>

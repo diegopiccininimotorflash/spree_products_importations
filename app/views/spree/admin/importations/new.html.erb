@@ -1,0 +1,11 @@
+<% content_for :page_title do %>
+  <%= t(:importations) %>
+<% end %>
+<%= render :partial => 'spree/admin/shared/product_sub_menu' %>
+
+
+<h3>Nueva Importación</h3>
+
+<%= render 'form' %>
+
+<%= link_to 'Back', admin_importations_path %>

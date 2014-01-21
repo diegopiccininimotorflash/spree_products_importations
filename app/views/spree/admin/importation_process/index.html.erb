@@ -1,0 +1,29 @@
+<%= render :partial => 'spree/admin/importation_process/menu' %>
+
+<p>
+  <b><%= t(:columns) %>:</b> <%= @importation_attachment.ncols %>,   <b><%= t(:lines) %>:</b>  <%= @importation_attachment.nlines %>,
+     <b><%= t(:rows) %>:</b>  <%= @importation_attachment.get_nrows %>
+</p>
+<br />
+
+ 
+
+<h2>
+<% if @importation_attachment.status < @importation_attachment.get_maximun_status %>
+	<%= link_to 'Procesar siguiente paso',  '/admin/importation_process/step' + @importation_attachment.status.to_s + '/' + @importation_attachment.id.to_s %> |
+	<b><%= @importation_attachment.get_step_name @importation_attachment.status %></b> 
+<% else %>
+    Importación finalizada <br />
+		<%= link_to 'Ver estado de los registros importados  ' ,  '/admin/importation_process/final_' + @importation_attachment.collection_name + '/' + @importation_attachment.id.to_s %> 
+
+<% end%>
+</h2>
+<br />
+<h4>Pasos realizados</h4>
+
+<% for status in 1..(@importation_attachment.status - 1)  %>
+    <br />
+     <p> <%= link_to 'Reprocesar desde el paso ' + status.to_s ,  '/admin/importation_process/step' + status.to_s + '/' + @importation_attachment.id.to_s %> | 
+     	<b><%= @importation_attachment.get_step_name status %></b>
+	</p>
+<% end %>

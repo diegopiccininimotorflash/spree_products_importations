@@ -1,0 +1,78 @@
+<% content_for :page_title do %>
+  <%= t(:importations) %>
+<% end %>
+<%= render :partial => 'spree/admin/shared/product_sub_menu' %>
+
+
+<h1>Editando Importación: <%=@importation.name %></h1>
+
+
+<br />
+<h2>Debe subir estos ficheros</h2>
+<table>
+	<tr>
+		<th><%= t(:filemame)%></th>
+		<th><%= t(:tasks_and_actions)%></th>
+	</tr>
+<% @importation.attachments_not_uploaded.each do |attachment| %>
+    <tr>
+    	<td><%= t(attachment) %></td>
+    	<td>  <%= link_to t(:upload_file), new_admin_importation_attachment_path()+'/?collection='+attachment %></td>
+    </tr>
+<% end %>
+</table>
+<br />
+<h2>Ficheros subidos</h2>
+<table>
+  <tr>
+    <th><%= t(:filemame)%></th>
+    <th><%= t(:content_type)%></th>
+    <th><%= t(:collection_name)%></th>
+    <th><%= t(:tasks_and_actions)%></th>
+
+  </tr>
+
+<% @importation.attachments.each do |importation_attachment| %>
+  <tr>
+    <td><%= importation_attachment.filename %></td>
+    <td><%= importation_attachment.content_type %></td>
+    <td><%= t(importation_attachment.collection_name) %></td>
+    
+    <td><% if importation_attachment.collection_name=='images' %>
+    	   <% if importation_attachment.status < importation_attachment.get_maximun_status %>
+    	     <%= link_to 'Descomprimir',  '/admin/importation_process/unzip/'+importation_attachment.id.to_s %>
+    	   <% else %>
+             <%= link_to 'Ver',  '/admin/importation_process/showimages/'+importation_attachment.id.to_s %>
+           <% end %> |
+    	<% else %>
+    	    <% if importation_attachment.collection_name=='variants' %>
+    	    	<%= link_to 'Estado Imágenes',  '/admin/importation_process/variant_images/'+importation_attachment.id.to_s %> |
+    	    <% end %>
+	    	<%= link_to 'Ver contenido', [:admin,importation_attachment] %> | 
+	    	<% if importation_attachment.status < importation_attachment.get_maximun_status %>
+	    	   <%= link_to 'Procesar',  '/admin/importation_process/index/'+importation_attachment.id.to_s %>
+	        <% else %>
+	           <%= link_to 'Procesado',  '/admin/importation_process/final_'+importation_attachment.collection_name+'/'+importation_attachment.id.to_s %>
+	        <% end %>
+	     | 
+	     <% end %>
+	     <%= link_to 'Borrar', [:admin,importation_attachment], method: :delete %>  
+	     
+     </td>
+  </tr>
+<% end %>
+</table>
+
+<% unless @importation.get_files.empty? %>
+
+  <hr />
+  <h4>Imágenes subidas</h4>
+	<% @importation.get_files.each_value do |file| %>
+		<p><%= file[:name] %></p>   
+	<% end %>
+   <br />
+   <p><%= link_to 'Borrar todas las Imagenes subidas',  '/admin/importation_process/remove_images/'+@importation.id.to_s %></p>
+   <hr />
+
+<% end %>
+<%= link_to 'Volver', admin_importations_path  %> 

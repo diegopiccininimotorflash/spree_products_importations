@@ -1,0 +1,10 @@
+<% content_for :page_title do %>
+  <%= t(:importations) %>
+<% end %>
+<%= render :partial => 'spree/admin/shared/product_sub_menu' %>
+
+<h1>Subir el fichero</h1>
+
+<%= render 'form' %>
+<br />
+<%= link_to 'Volver', edit_admin_importation_path(session[:importation_actual_id]) %>

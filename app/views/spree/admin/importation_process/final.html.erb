@@ -1,0 +1,10 @@
+<%= render :partial => 'spree/admin/importation_process/menu' %>
+<h1>Estado de los Registros Importados </h1>
+<br />
+<ul>
+	<% @importation_attachment.final.each do |message| %>
+	<li>
+		<%= message[:sku] %>, <b><%=@importation_attachment.get_message_by_collection_status message[:status] %></b>
+	</li>
+	<% end %>
+</ul>
